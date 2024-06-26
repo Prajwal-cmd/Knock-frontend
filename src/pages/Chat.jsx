@@ -99,13 +99,13 @@ const Chat = ({ chatId, user }) => {
   // Add old messages when they arrive and adjust scroll position to prevent jump to bottom
   useEffect(() => {
     if (oldMessagesChunk.data) {
-      const prevScrollHeight = containerRef.current.scrollHeight;
-      const prevScrollTop = containerRef.current.scrollTop;
+      const prevScrollHeight = containerRef?.current?.scrollHeight;
+      const prevScrollTop = containerRef?.current?.scrollTop;
       setOldMessages((prev) => [...oldMessagesChunk.data.message, ...prev]);
 
       // Adjust scroll position to prevent jump to bottom
       setTimeout(() => {
-        containerRef.current.scrollTop = prevScrollTop + (containerRef.current.scrollHeight - prevScrollHeight);
+        containerRef?.current?.scrollTop = prevScrollTop + (containerRef?.current?.scrollHeight - prevScrollHeight);
         setIsFetching(false);
       }, 0);
     }
@@ -164,7 +164,7 @@ const Chat = ({ chatId, user }) => {
   
   useEffect(() => {
     const handleScroll = () => {
-      if (containerRef.current.scrollTop === 0 && !isFetching) {
+      if (containerRef?.current?.scrollTop === 0 && !isFetching) {
         setPage((prev) => prev + 1)
         setIsFetching(true);
         
@@ -172,12 +172,12 @@ const Chat = ({ chatId, user }) => {
     };
     
 
-    const container = containerRef.current;
+    const container = containerRef?.current;
     if (container) {
       container.addEventListener("scroll", handleScroll);
       return () => container.removeEventListener("scroll", handleScroll);
     }
-  }, [isFetching,containerRef.current]);
+  }, [isFetching,containerRef?.current]);
  
 
   return chatDetails.isLoading ? (
