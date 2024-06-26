@@ -98,7 +98,7 @@ const AppLayout = () => (WrappedComponent) => {
         )
       }
 
-        <Grid container style={{ height: "calc(100vh - 4rem)" }}>
+        <Grid container style={{ height: "calc(100vh - 4rem)", overflow: 'hidden', margin: 0  }}>
           <Grid
             item
             sm={4}
@@ -134,6 +134,7 @@ const AppLayout = () => (WrappedComponent) => {
               display: { xs: "none", md: "block" },
               padding: "2rem",
               bgcolor: "rgba(0,0,0,0.85)",
+              overflowY: 'auto',
             }}
           >
             <Profile user={user} />
