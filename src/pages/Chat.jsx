@@ -97,19 +97,38 @@ const Chat = ({ chatId, user }) => {
   }, [chatDetails.isError]);
 
   // Add old messages when they arrive and adjust scroll position to prevent jump to bottom
+  // useEffect(() => {
+  //   if (oldMessagesChunk.data) {
+  //     const prevScrollHeight = containerRef?.current?.scrollHeight;
+  //     const prevScrollTop = containerRef?.current?.scrollTop;
+  //     setOldMessages((prev) => [...oldMessagesChunk.data.message, ...prev]);
+
+  //     // Adjust scroll position to prevent jump to bottom
+  //     setTimeout(() => {
+  //       containerRef?.current?.scrollTop = prevScrollTop + (containerRef?.current?.scrollHeight - prevScrollHeight);
+  //       setIsFetching(false);
+  //     }, 0);
+  //   }
+  // }, [oldMessagesChunk.data]);
   useEffect(() => {
-    if (oldMessagesChunk.data) {
-      const prevScrollHeight = containerRef?.current?.scrollHeight;
-      const prevScrollTop = containerRef?.current?.scrollTop;
+  if (oldMessagesChunk.data) {
+    const container = containerRef?.current;
+    if (container) {
+      const prevScrollHeight = container.scrollHeight;
+      const prevScrollTop = container.scrollTop;
       setOldMessages((prev) => [...oldMessagesChunk.data.message, ...prev]);
 
       // Adjust scroll position to prevent jump to bottom
       setTimeout(() => {
-        containerRef?.current?.scrollTop = prevScrollTop + (containerRef?.current?.scrollHeight - prevScrollHeight);
+        if (container) {
+          container.scrollTop = prevScrollTop + (container.scrollHeight - prevScrollHeight);
+        }
         setIsFetching(false);
       }, 0);
     }
-  }, [oldMessagesChunk.data]);
+  }
+}, [oldMessagesChunk.data]);
+
 
   const newMessagesHandler = useCallback(
     (data) => {
