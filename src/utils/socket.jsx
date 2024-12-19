@@ -14,8 +14,8 @@ const getSocket =() =>useContext(SocketContext)
 
 
 const SocketProvider = ({children})=>{
-    const socket = useMemo(()=>io(server,{path: "/socket.io/",
-  transports: ["polling", "websocket"],withCredentials:true,}),[])
+    const socket = useMemo(()=>io(server,{path: "/socket.io",
+  transports: ["websocket","polling"],withCredentials:true,}),[])
     
 
     return (
