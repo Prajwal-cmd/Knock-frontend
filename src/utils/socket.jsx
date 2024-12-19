@@ -14,7 +14,7 @@ const getSocket =() =>useContext(SocketContext)
 
 
 const SocketProvider = ({children})=>{
-    const socket = useMemo(()=>io("https://kbe-rishis-projects-e7f56ed1.vercel.app/",{withCredentials:true,}),[])
+    const socket = useMemo(()=>io("https://kbe-rishis-projects-e7f56ed1.vercel.app",{withCredentials:true,}),[])
     
 
     return (
