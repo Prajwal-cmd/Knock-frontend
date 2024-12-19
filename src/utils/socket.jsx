@@ -14,7 +14,9 @@ const getSocket =() =>useContext(SocketContext)
 
 
 const SocketProvider = ({children})=>{
-    const socket = useMemo(()=>io(server,{path: "/socket.io/",withCredentials:true,}),[])
+    const socket = useMemo(()=>io(server,{auth: {
+    token: localStorage.getItem("token"), // Pass authentication token if required
+  },path: "/socket.io/",withCredentials:true,}),[])
     
 
     return (
